@@ -1,10 +1,10 @@
 package main
 
 import (
-    "check"
-    "fmt"
-    "io/ioutil"
-    "strconv"
+	"check"
+	"fmt"
+	"io/ioutil"
+	"strconv"
 )
 
 /*
@@ -21,27 +21,27 @@ For example:
 
 */
 func part1(data []byte) {
-    size := len(data) - 1
-    total := 0
-    first, err := strconv.Atoi(string(data[0]))
-    check.Check(err)
-    for idx, char := range data {
-        num, err := strconv.Atoi(string(char))
-        check.Check(err)
-        if idx == size {
-            if num == first {
-                total += num
-            }
-        } else {
-            next, err := strconv.Atoi(string(data[idx+1]))
-            check.Check(err)
-            if num == next {
-                total += num
-            }
-        }
-    }
+	size := len(data) - 1
+	total := 0
+	first, err := strconv.Atoi(string(data[0]))
+	check.Check(err)
+	for idx, char := range data {
+		num, err := strconv.Atoi(string(char))
+		check.Check(err)
+		if idx == size {
+			if num == first {
+				total += num
+			}
+		} else {
+			next, err := strconv.Atoi(string(data[idx+1]))
+			check.Check(err)
+			if num == next {
+				total += num
+			}
+		}
+	}
 
-    fmt.Printf("%v\n", total)
+	fmt.Printf("%v\n", total)
 }
 
 /*
@@ -58,31 +58,31 @@ For example:
 
 */
 func part2(data []byte) {
-    size := len(data)
-    half := size / 2
-    total := 0
-    for idx, char := range data {
-        num, err := strconv.Atoi(string(char))
-        check.Check(err)
-        idx = idx + half
-        if idx > size-1 {
-            idx = idx % half
-        }
-        next, err := strconv.Atoi(string(data[idx]))
-        check.Check(err)
-        if num == next {
-            total += num
-        }
-    }
+	size := len(data)
+	half := size / 2
+	total := 0
+	for idx, char := range data {
+		num, err := strconv.Atoi(string(char))
+		check.Check(err)
+		idx = idx + half
+		if idx > size-1 {
+			idx = idx % half
+		}
+		next, err := strconv.Atoi(string(data[idx]))
+		check.Check(err)
+		if num == next {
+			total += num
+		}
+	}
 
-    fmt.Printf("%v\n", total)
+	fmt.Printf("%v\n", total)
 }
 
 func main() {
-    data, err := ioutil.ReadFile("input.txt")
-    check.Check(err)
+	data, err := ioutil.ReadFile("input.txt")
+	check.Check(err)
 
-    data = data[0 : len(data)-1] // trim newline
-    part1(data)
-    part2(data)
+	data = data[0 : len(data)-1] // trim newline
+	part1(data)
+	part2(data)
 }

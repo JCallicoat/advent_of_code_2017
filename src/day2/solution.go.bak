@@ -1,12 +1,12 @@
 package main
 
 import (
-    "bufio"
-    "check"
-    "fmt"
-    "os"
-    "strconv"
-    "strings"
+	"bufio"
+	"check"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
 )
 
 /*
@@ -27,21 +27,21 @@ In this example, the spreadsheet's checksum would be 8 + 4 + 6 = 18.
 
 */
 func part1(rows []string) int {
-    large := 1
-    small := 1
-    for idx, char := range rows {
-        num, _ := strconv.Atoi(char)
-        if idx == 0 {
-            small = num
-        }
-        if num > large {
-            large = num
-        }
-        if num < small {
-            small = num
-        }
-    }
-    return large - small
+	large := 1
+	small := 1
+	for idx, char := range rows {
+		num, _ := strconv.Atoi(char)
+		if idx == 0 {
+			small = num
+		}
+		if num > large {
+			large = num
+		}
+		if num < small {
+			small = num
+		}
+	}
+	return large - small
 }
 
 /*
@@ -65,37 +65,37 @@ In this example, the sum of the results would be 4 + 3 + 2 = 9.
 */
 
 func part2(rows []string) int {
-    for idx, last := range rows {
-        last, err := strconv.Atoi(last)
-        check.Check(err)
-        for _, next := range rows[idx+1:] {
-            next, err := strconv.Atoi(next)
-            check.Check(err)
-            if last%next == 0 {
-                return last / next
-            } else if next%last == 0 {
-                return next / last
-            }
-        }
-    }
-    return 0
+	for idx, last := range rows {
+		last, err := strconv.Atoi(last)
+		check.Check(err)
+		for _, next := range rows[idx+1:] {
+			next, err := strconv.Atoi(next)
+			check.Check(err)
+			if last%next == 0 {
+				return last / next
+			} else if next%last == 0 {
+				return next / last
+			}
+		}
+	}
+	return 0
 }
 
 func main() {
-    file, err := os.Open("input.txt")
-    defer file.Close()
-    check.Check(err)
+	file, err := os.Open("input.txt")
+	defer file.Close()
+	check.Check(err)
 
-    part1sum := 0
-    part2sum := 0
+	part1sum := 0
+	part2sum := 0
 
-    scanner := bufio.NewScanner(file)
-    for scanner.Scan() {
-        cells := strings.Split(scanner.Text(), "\t")
-        part1sum += part1(cells)
-        part2sum += part2(cells)
-    }
-    check.Check(scanner.Err())
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		cells := strings.Split(scanner.Text(), "\t")
+		part1sum += part1(cells)
+		part2sum += part2(cells)
+	}
+	check.Check(scanner.Err())
 
-    fmt.Printf("%v\n%v\n", part1sum, part2sum)
+	fmt.Printf("%v\n%v\n", part1sum, part2sum)
 }

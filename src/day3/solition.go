@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"math"
+    "fmt"
+    "math"
 )
 
 /*
@@ -33,47 +33,47 @@ Your puzzle input is 325489.
 */
 
 func part1(input int) int {
-	steps := 0    // how many squares have been created from the center
-	iter := 1     // how long a given side of the square is
-	current := 0  // the last number of the current square
-	previous := 0 // the last number of the previous square
+    steps := 0    // how many squares have been created from the center
+    iter := 1     // how long a given side of the square is
+    current := 0  // the last number of the current square
+    previous := 0 // the last number of the previous square
 
-	// calculate how many squares we need before we find `input` in the square
-	for current < input {
-		iter += 2
-		previous = current
-		current = iter * iter
-		steps++
-	}
+    // calculate how many squares we need before we find `input` in the square
+    for current < input {
+        iter += 2
+        previous = current
+        current = iter * iter
+        steps++
+    }
 
-	// number of items in a side of the square that contains `input`
-	count := (current - previous) / 4
+    // number of items in a side of the square that contains `input`
+    count := (current - previous) / 4
 
-	// dist is calculated by finding the distance to the center of
-	// the side (count/2) of the square containing `input` from
-	// the position where `input` is located
-	dist := 0
-	if input <= previous+count { // `input` in right side of square
-		dist = count/2 - ((previous + count) - input)
-	} else if input <= previous+(count*2) { // `input` in top side of square
-		dist = count/2 - ((previous + (count * 2)) - input)
-	} else if input <= previous+(count*3) { // `input` in left side of square
-		dist = count/2 - ((previous + (count * 3)) - input)
-	} else if input <= previous+(count*4) { // `input` in bottom side of square
-		dist = count/2 - ((previous + (count * 4)) - input)
-	}
+    // dist is calculated by finding the distance to the center of
+    // the side (count/2) of the square containing `input` from
+    // the position where `input` is located
+    dist := 0
+    if input <= previous+count { // `input` in right side of square
+        dist = count/2 - ((previous + count) - input)
+    } else if input <= previous+(count*2) { // `input` in top side of square
+        dist = count/2 - ((previous + (count * 2)) - input)
+    } else if input <= previous+(count*3) { // `input` in left side of square
+        dist = count/2 - ((previous + (count * 3)) - input)
+    } else if input <= previous+(count*4) { // `input` in bottom side of square
+        dist = count/2 - ((previous + (count * 4)) - input)
+    }
 
-	// the manhatten distance is the sum of the absolute value of dist
-	// and the number of squares created from the center
-	return steps + int(math.Abs(float64(dist)))
+    // the manhatten distance is the sum of the absolute value of dist
+    // and the number of squares created from the center
+    return steps + int(math.Abs(float64(dist)))
 }
 
 func part2(input int) int {
-	return 0
+    return 0
 }
 
 func main() {
-	input := 325489
-	fmt.Printf("%v\n", part1(input))
-	fmt.Printf("%v\n", part2(input))
+    input := 325489
+    fmt.Printf("%v\n", part1(input))
+    fmt.Printf("%v\n", part2(input))
 }
